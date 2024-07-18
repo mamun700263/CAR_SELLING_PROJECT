@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class='text-center'>
+    <h1>{{user.first_name}} {{user.last_name}} </h1>
+    <small class='text-primary'>{{user}} {{user.email}} </small>
+    <a href="{% url 'editinfo' user.id %}" class='btn btn-warning'>Edit User Informations</a>
+</div>
+<h1 class='bg-success text-white mt-5'> Your Purchase historY: {{Your_Cars}} </h1>
+
+<div class='my-3 border w-100'>
+    {% for history in histories %}
+    <div class='d-flex border w-100 my-3 '>
+            <t><h5 class="card-title">car :  {{history.car}}</h5>
+            <t><h5 class="card-title">quantity :  {{history.quantity}}</h5>
+            <t><h5 class="card-title">Price :  {{history.total_price}}$</h5>
+            <t><h5>date :  {{history.time}}</h5>
+            </div>
+
+    {% endfor %}
+    </div>
+{% endblock content %}
