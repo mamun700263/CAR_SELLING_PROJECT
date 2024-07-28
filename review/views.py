@@ -8,12 +8,12 @@ from .forms import *
 
 
 
-# Create your views here.
-
-
-# class CommentFormView(CreateView):
-#     model = CommentModel
-#     form_class = CommentForm
-#     template_name = 'accounts/forms.html'
-#     # success_url = ''
-
+def add_comment(request):
+    if request.method != 'POST':
+        form = CommentForm()
+    else:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cars:detailview')
+    return render(request,'cars/details.html')

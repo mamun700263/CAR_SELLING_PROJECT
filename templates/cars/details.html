@@ -19,7 +19,6 @@
             <p class="card-text"><b>Details :</b>{{car.detail}} </p>
             <p class="card-text"><b>Price :</b>{{car.price}}$ per unit </p>
         </div>
-
         <div class='mt-auto col-lg-12'>
             
             {% if user.is_authenticated %}
@@ -30,7 +29,7 @@
             </form>
             
             {% else %}
-            <a href="{% url 'login' %}" class='btn btn-success w-100'>Log in to buy for {{total_price}}</a>
+            <a href="{% url 'login' %}" class='btn btn-success w-100'>Log in to buy for {{total_price}} $</a>
             {% endif %}
             
         </div>
@@ -38,51 +37,32 @@
 </div>
 
 
+<h1  class="">comment : </h1>
 
+<form action="{% url 'comment' car.id %}" method="post" class='w-50 '>
 
-
-
-
-
-
-
-
-<h1  class="bg-dark text-white">Add comment : </h1>
-<form action="" method="post" class='w-50 m-auto'>
     {% csrf_token %}
     {{comment_form |crispy}}
-    <input type="submit" value="Submit">
+    <input type="submit" value="Add comment">
+
 </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1  class="bg-dark text-white">Reviews: </h1>
-<div class = 'd-flex flex-wrap justify-content-center'> 
+<h1  class="bg-dark text-white my-5 text-center" id='reviews'>Reviews</h1>
+<div class = 'justify-content-center'> 
 {% for comment in comments %}
 <div class="card m-3 ">
-    <div class="card-header ">
+    <div class="card-header">
+        <p class="card-title"><b>{{comment.name}}</b></p>
+        <small class="card-text">{{comment.time | date:'M d, Y '}}</small>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{comment.name}}</h5>
-      <p class="card-text">{{comment.message}}</p>
+        <p class="card-text">{{comment.message}}</p>
+
+        <br>
+        {% comment %} <small class="card-text">{{comment.time | date:'H:m'}}</small> {% endcomment %}
     </div>
-  </div>
+</div>
 
 {% endfor %}
 </div>

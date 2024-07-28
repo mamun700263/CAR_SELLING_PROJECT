@@ -1,13 +1,25 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}{{formtype}}{% endblock title %}
-
+{% block title %}{{form_type}}{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="/static/accounts/css/form.css">
+{% endblock css %}
 {% block content %}
 
-<form action="" method="post" class = "w-50 m-auto ">
+{% if form.errors %}
+<p class='text-center text-danger'>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form action="" method="post" class = "w-50 m-auto " >
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit" value="Submit" class='btn btn-outline-primary'>
+
+    {% if form_type == 'Registration' %}
+    I already have an account <a href="{% url 'login' %}">Log in</a>
+    {% elif form_type == 'Login' %}
+    I don't have an account <a href="{% url 'registration' %}">Create one</a>
+    {% endif %}
 </form>
 
 {% endblock content %}

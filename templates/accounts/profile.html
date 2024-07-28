@@ -12,13 +12,20 @@
 
 <div class='my-3 border w-100'>
     {% for history in histories %}
-    <div class='d-flex border w-100 my-3 '>
-            <t><h5 class="card-title">car :  {{history.car}}</h5>
-            <t><h5 class="card-title">quantity :  {{history.quantity}}</h5>
-            <t><h5 class="card-title">Price :  {{history.total_price}}$</h5>
-            <t><h5>date :  {{history.time}}</h5>
-            </div>
-
-    {% endfor %}
+    <div class='border w-100 my-3 d-flex '>
+        <div class='me-5'>
+            <img src="{{history.car.image}}" alt="" style="width: 300px;">
+        </div>
+        <div id='car_informations' class=''>
+            
+            <small>{{history.time}}</small>
+            <h5 class="card-title">car : {{history.car}}</h5>
+            <h5 class=" mx-auto">Price : {{history.car.price}}$</h5>
+        <br>
+        <h5 class="card-text ">quantity : {{history.quantity}}</h5>
+        <h5 class="card-text ">Total : <button class='btn btn-warning'>{{history.total_price}}$</button></h5>
     </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

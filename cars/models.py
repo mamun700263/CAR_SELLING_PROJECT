@@ -5,8 +5,10 @@ from django.contrib.auth.models import User
 
 
 class BrandModel(models.Model):
+    """
+    there will be a brand name only
+    """
     name = models.CharField(max_length=100,unique=True,verbose_name= 'Car Brand ')
-
     def __str__(self):
         return self.name
     
